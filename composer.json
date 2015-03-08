@@ -1,0 +1,14 @@
+{
+    "config": {
+        "preferred-install": "dist"
+    },
+    "require": {
+        "fguillot/picofeed": "dev-master"
+    },
+    "autoload": {
+        "classmap": [
+            "vendor/fguillot/picofeed/lib/",
+            "octom/"
+        ]
+    }
+}
