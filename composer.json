@@ -1,4 +1,15 @@
 {
+    "name": "mkresin/octom",
+    "description": "A GitHub API bridge",
+    "homepage": "https://github.com/mkresin/octom",
+    "type": "library",
+    "license": " AGPL-1.0",
+    "authors": [
+        {
+            "name": "Mathias Kresin",
+            "homepage": "http://www.kresin.me"
+        }
+    ],
     "config": {
         "preferred-install": "dist"
     },
@@ -6,9 +17,8 @@
         "fguillot/picofeed": "dev-master"
     },
     "autoload": {
-        "classmap": [
-            "vendor/fguillot/picofeed/lib/",
-            "octom/"
-        ]
+        "psr-4": {
+            "octom\\": "octom"
+        }
     }
 }
