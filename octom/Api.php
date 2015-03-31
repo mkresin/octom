@@ -85,17 +85,18 @@ class Api
         // debug informations
         $this->rate_limit['X-Number-Queries'] += 1;
         $this->rate_limit['X-RateLimit-Limit'] = $response['headers']['X-RateLimit-Limit'];
-        $this->rate_limit['X-RateLimit-Remaining'] = $response['headers']['X-RateLimit-Remaining']; //could be missing if nothing remains
+        //X-RateLimit-Remaining could be missing if nothing remains
+        $this->rate_limit['X-RateLimit-Remaining'] = $response['headers']['X-RateLimit-Remaining'];
         $this->rate_limit['X-RateLimit-Reset'] = $response['headers']['X-RateLimit-Reset'];
 
         if ($response['status'] === 304) {
-            header("HTTP/1.1 304 Not Modified");
+            header('HTTP/1.1 304 Not Modified');
             exit;
         }
         elseif ($response['status'] !== 200) {
             // something unexpected happend; maybe the ratelimit exceeded
             // handle errors here
-            header("HTTP/1.1 500 Upstream error");
+            header('HTTP/1.1 500 Upstream error');
             exit;
         }
 

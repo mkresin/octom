@@ -71,7 +71,7 @@ class Issues extends Api
         $date_parser = new DateParser();
         $feed = new Atom();
 
-        foreach($this->issues as $issue) {
+        foreach ($this->issues as $issue) {
             $feed->items[] = array(
                 'id' => $issue->url,
                 'title' =>  'Issue '.$issue->number.' ('.$issue->title.') '.$issue->state,
@@ -99,11 +99,15 @@ class Issues extends Api
      * @param array $items
      * @return boolean true if item is removed
      */
-    private function filterFirstItem(&$items) {
+    private function filterFirstItem(&$items)
+    {
         $item = current($items);
 
-        if ((isset($item->pull_request) || isset($item->issue->pull_request)) // drop pull requests
-            || (isset($item->event) && ! in_array($item->event, $this->event_whitelist))) { // drop not whitelisted events
+        // drop pull requests
+        if ((isset($item->pull_request) || isset($item->issue->pull_request))
+            // drop not whitelisted events
+            || (isset($item->event) && ! in_array($item->event, $this->event_whitelist))
+        ) {
             array_shift($items);
             return true;
         }
@@ -180,7 +184,6 @@ class Issues extends Api
         // stop conditions are: the number of requested issues fetched OR
         // (no more issues to fetch AND no more events to fetch)
         while (count($this->issues) < $this->nb_issues && (! empty($issues['content']) || ! empty($events))) {
-
             if ($this->filterFirstItem($issues['content']) || $this->filterFirstItem($events)) {
                 // do nothing if the input values where modified
             }
@@ -216,7 +219,7 @@ class Issues extends Api
      */
     private function unifyIssues()
     {
-        foreach($this->issues as &$issue) {
+        foreach ($this->issues as &$issue) {
             if (isset($issue->event)) {
                 $issue->issue->id = $issue->id;
                 $issue->issue->url = $issue->url;
@@ -231,7 +234,12 @@ class Issues extends Api
                 if (isset($issue->commit_id)) {
                     // assume the commit hash is from the current repository,
                     // which isn't necessary true
-                    $issue->body = sprintf('%1$s with commit <a href="%2$s/commit/%3$s">%3$s</a>', $issue->state, $this->repo->html_url, $issue->commit_id);
+                    $issue->body = sprintf(
+                        '%1$s with commit <a href="%2$s/commit/%3$s">%3$s</a>',
+                        $issue->state,
+                        $this->repo->html_url,
+                        $issue->commit_id
+                    );
                 }
                 else {
                     $issue->body = ''; // it's always the content of the original issue

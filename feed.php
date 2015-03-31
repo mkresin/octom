@@ -1,4 +1,5 @@
 <?php
+
 require 'vendor/autoload.php';
 
 use octom\Issues;
@@ -15,22 +16,22 @@ function getHTTPInputValues($octom_token)
 
     // check for required input values
     if ($octom_token === '') {
-        header("HTTP/1.1 400 Module is disabled");
+        header('HTTP/1.1 400 Module is disabled');
         exit;
     }
     elseif (! isset($_GET['token']) || $_GET['token'] !== $octom_token) {
-        header("HTTP/1.1 401 Token missmatch");
+        header('HTTP/1.1 401 Token missmatch');
         exit;
     }
     elseif (empty($_GET['content'])) {
-        header("HTTP/1.1 400 Target repository/content missing");
+        header('HTTP/1.1 400 Target repository/content missing');
         exit;
     }
     else {
         list($values['owner'], $values['repo'], $values['contenttype']) = explode('/', $_GET['content']);
 
         if (empty($values['owner']) || empty($values['repo']) || empty($values['contenttype'])) {
-            header("HTTP/1.1 400 Content parameter missing or incomplete");
+            header('HTTP/1.1 400 Content parameter missing or incomplete');
             exit;
         }
 
@@ -54,4 +55,3 @@ foreach ($issues->rate_limit as $header => $value) {
 header('Etag: '.$issues->getEtag());
 
 echo $issues->getFeed();
-?>
