@@ -6,12 +6,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/fguillot/picoFeed.git",
-            "reference": "a006fc10642fbdc5414bebd6542aeabd35f8c98b"
+            "reference": "b06d5a8d084ab76817566a237d6179ac36348ed9"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/fguillot/picoFeed/zipball/a006fc10642fbdc5414bebd6542aeabd35f8c98b",
-            "reference": "a006fc10642fbdc5414bebd6542aeabd35f8c98b",
+            "url": "https://api.github.com/repos/fguillot/picoFeed/zipball/b06d5a8d084ab76817566a237d6179ac36348ed9",
+            "reference": "b06d5a8d084ab76817566a237d6179ac36348ed9",
             "shasum": ""
         },
         "require": {
@@ -22,7 +22,13 @@
             "ext-xml": "*",
             "php": ">=5.3.0"
         },
-        "time": "2015-03-03 03:14:01",
+        "suggest": {
+            "ext-curl": "PicoFeed will use cURL if present"
+        },
+        "time": "2015-03-31 22:31:16",
+        "bin": [
+            "picofeed"
+        ],
         "type": "library",
         "installation-source": "dist",
         "autoload": {

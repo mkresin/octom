@@ -71,13 +71,16 @@ class Api
      */
     protected function getContent($url, $etag = '')
     {
+        $request_headers = array(
+            'Accept: application/vnd.github.v3.html+json',
+            'Authorization: token '.$this->token
+        );
+
         $client = Client::getInstance();
         $client->setUserAgent('octom (https://github.com/mkresin/octom)');
+        $client->setHeaders($request_headers);
         $client->setEtag($etag);
-        $client->setUsername('token');
-        $client->setPassword($this->token);
         $client->setUrl($url);
-        // TODO: add HTML Header: "Accept: application/vnd.github.v3.html+json"
 
         // returns headers if needed
         $response = $client->doRequest();

@@ -78,7 +78,7 @@ class Issues extends Api
                 'url' => $issue->html_url,
                 'author' => array('name' => $issue->user->login),
                 'updated' => $date_parser->getDateTime($issue->created_at)->getTimestamp(),
-                'content' => $issue->body,
+                'content' => $issue->body_html,
             );
         }
 
@@ -234,7 +234,7 @@ class Issues extends Api
                 if (isset($issue->commit_id)) {
                     // assume the commit hash is from the current repository,
                     // which isn't necessary true
-                    $issue->body = sprintf(
+                    $issue->body_html = sprintf(
                         '%1$s with commit <a href="%2$s/commit/%3$s">%3$s</a>',
                         $issue->state,
                         $this->repo->html_url,
@@ -242,7 +242,7 @@ class Issues extends Api
                     );
                 }
                 else {
-                    $issue->body = ''; // it's always the content of the original issue
+                    $issue->body_html = ''; // it's always the content of the original issue
                 }
 
                 // add anchor to html url
