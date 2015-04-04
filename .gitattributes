@@ -1,0 +1,26 @@
+# used to remove files from deployment using `git archive`
+
+# git files
+.gitattributes export-ignore
+.gitignore export-ignore
+
+# core
+.travis.yml export-ignore
+phpcs.xml export-ignore
+
+# documentation
+docs/ export-ignore
+README.* export-ignore
+
+# composer files
+composer.json export-ignore
+composer.lock export-ignore
+vendor/composer/installed.json export-ignore
+
+# unittests
+phpunit.xml export-ignore
+tests/ export-ignore
+
+# binaries
+vendor/bin/ export-ignore
+vendor/fguillot/picofeed/picofeed export-ignore

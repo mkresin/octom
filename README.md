@@ -69,4 +69,3 @@ are send as response HTTP headers with every feed.
  - the only input are issues
  - the only output is an atom feed
  - the link to the closing commit may be wrong (the GitHub API doesn't indicate to which repository the commit belongs, but allows closing an issue with a commit to foreign repositories)
- - the feed item text is always in text format, even with links to images
